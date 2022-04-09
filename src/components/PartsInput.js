@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import uniqid from "uniqid";
+import { useParts } from "./PartsContext";
 
 function PartsInput() {
-  const [formPart, setFormPart] = useState({
-    formPartName: "",
-    formPartCategory: "",
-    formPartDetails: "",
-    formPartPrice: "",
-  });
+  const { defPart, parts, setParts } = useParts();
+  const [formPart, setFormPart] = useState(defPart);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -18,8 +17,35 @@ function PartsInput() {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formPart) {
+      setError(false);
+      let newPart = {
+        id: uniqid(),
+        ...formPart,
+      };
+      setParts([newPart, ...parts]);
+      setFormPart(defPart);
+    } else {
+      setError(true);
+      setFormPart(defPart);
+    }
+  };
+
+  useEffect(() => {
+    const parts = JSON.parse(localStorage.getItem("parts"));
+    if (parts) {
+      setParts(parts);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("parts", JSON.stringify(parts));
+  }, [parts]);
+
   return (
-    <Form className="p-3">
+    <Form className="p-3 text-center" onSubmit={handleSubmit}>
       <div className="mb-3 d-lg-flex">
         <div className="d-flex flex-column justify-content-between w-100">
           <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartName">
@@ -87,7 +113,7 @@ function PartsInput() {
         </Form.Group>
       </div>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className="w-25">
         Add part
       </Button>
     </Form>
