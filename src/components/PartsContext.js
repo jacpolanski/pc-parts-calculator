@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const PartsContext = React.createContext(undefined);
 
@@ -7,11 +7,6 @@ export function useParts() {
 }
 
 export function PartsProvider({ children }) {
-  const [parts, setParts] = useState([]);
-  const deletePart = (id) => {
-    let newParts = parts.filter((part) => part.id !== id);
-    setParts([...newParts]);
-  };
   const defPart = {
     formPartName: "",
     formPartCategory: "",
@@ -19,10 +14,31 @@ export function PartsProvider({ children }) {
     formPartPrice: "",
   };
 
+  const [parts, setParts] = useState([]);
+  const [write, setWrite] = useState(false);
+
+  const deletePart = (id) => {
+    let newParts = parts.filter((part) => part.id !== id);
+    console.log(newParts);
+    setParts([...newParts]);
+    setWrite(true);
+  };
+
+  useEffect(() => {
+    const partsParsed = JSON.parse(localStorage.getItem("parts"));
+    partsParsed && setParts(partsParsed);
+  }, []);
+
+  useEffect(() => {
+    write && localStorage.setItem("parts", JSON.stringify(parts));
+    setWrite(false);
+  }, [write]);
+
   const value = {
     parts,
     setParts,
     defPart,
+    setWrite,
     deletePart,
   };
   return (

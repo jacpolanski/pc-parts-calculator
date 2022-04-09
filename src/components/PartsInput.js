@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import uniqid from "uniqid";
 import { useParts } from "./PartsContext";
 
 function PartsInput() {
-  const { defPart, parts, setParts } = useParts();
+  const { defPart, parts, setParts, setWrite } = useParts();
   const [formPart, setFormPart] = useState(defPart);
   const [error, setError] = useState(false);
 
@@ -25,24 +25,14 @@ function PartsInput() {
         id: uniqid(),
         ...formPart,
       };
-      setParts([newPart, ...parts]);
+      setParts([...parts, newPart]);
+      setWrite(true);
       setFormPart(defPart);
     } else {
       setError(true);
       setFormPart(defPart);
     }
   };
-
-  useEffect(() => {
-    const parts = JSON.parse(localStorage.getItem("parts"));
-    if (parts) {
-      setParts(parts);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("parts", JSON.stringify(parts));
-  }, [parts]);
 
   return (
     <Form className="p-3 text-center" onSubmit={handleSubmit}>
@@ -91,6 +81,7 @@ function PartsInput() {
           <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartPrice">
             <Form.Label>Add Part Price</Form.Label>
             <Form.Control
+              type="number"
               name="formPartPrice"
               value={formPart.formPartPrice}
               onChange={handleChange}
