@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 
 function PartsInput() {
   return (
-    <Form className="p-3 mb-5">
+    <Form className="p-3">
       <div className="mb-3 d-lg-flex">
         <div className="d-flex flex-column justify-content-between w-100">
           <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartName">
