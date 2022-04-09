@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 function PartsInput() {
+  const [formPart, setFormPart] = useState({
+    formPartName: "",
+    formPartCategory: "",
+    formPartDetails: "",
+  });
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+
+    setFormPart((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+
   return (
     <Form className="p-3">
       <div className="mb-3 d-lg-flex">
         <div className="d-flex flex-column justify-content-between w-100">
           <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartName">
             <Form.Label>Part Name</Form.Label>
-            <Form.Control placeholder="Please enter part name" required />
+            <Form.Control
+              name="formPartName"
+              value={formPart.formPartName}
+              onChange={handleChange}
+              placeholder="Please enter part name"
+              required
+            />
           </Form.Group>
 
           <Form.Group
@@ -16,7 +37,12 @@ function PartsInput() {
             controlId="formNewCategory"
           >
             <Form.Label>Add NEW Part Category</Form.Label>
-            <Form.Control placeholder="Enter new part category" />
+            <Form.Control
+              name="formNewCategory"
+              value={formPart.formPartName}
+              onChange={() => null}
+              placeholder="Enter new part category"
+            />
           </Form.Group>
 
           <Form.Group
@@ -24,14 +50,20 @@ function PartsInput() {
             controlId="formPartCategory"
           >
             <Form.Label>Add Part Category</Form.Label>
-            <Form.Select>
-              <option>Default select</option>
+            <Form.Select
+              name="formPartCategory"
+              value={formPart.formPartCategory}
+              onChange={handleChange}
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
             </Form.Select>
           </Form.Group>
 
           <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartPrice">
             <Form.Label>Add Part Price</Form.Label>
-            <Form.Control placeholder="Enter part price" />
+            <Form.Control placeholder="Enter part price" required />
           </Form.Group>
         </div>
 
@@ -40,6 +72,9 @@ function PartsInput() {
           <Form.Control
             as="textarea"
             rows={8}
+            name="formPartDetails"
+            value={formPart.formPartDetails}
+            onChange={handleChange}
             placeholder="Please enter part details"
           />
         </Form.Group>
