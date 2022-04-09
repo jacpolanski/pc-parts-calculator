@@ -1,8 +1,8 @@
-//Reset / Normalize / Flavour/
-@import "./global/reset";
+//Reset / Normalize / Flavour/ - not imported, messing up bootstrap
+//@import "./global/reset";
 
 //Bootstrap
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 
 //Variables
 
@@ -15,4 +15,3 @@
 @import "./global/generic";
 
 //Components
-
