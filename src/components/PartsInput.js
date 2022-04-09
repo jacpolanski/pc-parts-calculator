@@ -6,6 +6,7 @@ function PartsInput() {
     formPartName: "",
     formPartCategory: "",
     formPartDetails: "",
+    formPartPrice: "",
   });
 
   const handleChange = (e) => {
@@ -63,7 +64,13 @@ function PartsInput() {
 
           <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartPrice">
             <Form.Label>Add Part Price</Form.Label>
-            <Form.Control placeholder="Enter part price" required />
+            <Form.Control
+              name="formPartPrice"
+              value={formPart.formPartPrice}
+              onChange={handleChange}
+              placeholder="Enter part price"
+              required
+            />
           </Form.Group>
         </div>
 
