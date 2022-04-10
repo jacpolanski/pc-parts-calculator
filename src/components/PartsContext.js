@@ -45,7 +45,7 @@ export function PartsProvider({ children }) {
   useEffect(() => {
     write && localStorage.setItem("parts", JSON.stringify(parts));
     setWrite(false);
-  }, [write]);
+  }, [write, parts]);
 
   const value = {
     parts,

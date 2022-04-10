@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParts } from "./PartsContext";
-import { Button, Modal, Spinner, Table } from "react-bootstrap";
+import { Button, Spinner, Table } from "react-bootstrap";
+import DetailsModal from "./DetailsModal";
 
 function PartsList() {
   const { deletePart, parts } = useParts();
@@ -83,22 +84,11 @@ function PartsList() {
         </tfoot>
       </Table>
       {show && (
-        <Modal show={show} fullscreen="md-down" onHide={() => setShow(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>{partForModal[0].formPartName}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>
-              <strong>Part category:</strong> {partForModal[0].formPartCategory}
-            </p>
-            <p>
-              <strong>Description:</strong> {partForModal[0].formPartDetails}
-            </p>
-            <p>
-              <strong>Price:</strong> {partForModal[0].formPartPrice}
-            </p>
-          </Modal.Body>
-        </Modal>
+        <DetailsModal
+          partForModal={partForModal}
+          show={show}
+          setShow={setShow}
+        />
       )}
     </>
   );
