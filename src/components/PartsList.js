@@ -64,7 +64,9 @@ function PartsList() {
             onChange={(e) => setSortBy(e.target.value)}
           >
             <option>Name</option>
-            <option>Category</option>
+            <option className={categoryFilter !== "All" && "d-none"}>
+              Category
+            </option>
             <option>Price</option>
           </Form.Select>
         </Form.Group>
