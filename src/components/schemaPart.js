@@ -11,7 +11,7 @@ export const schemaPart = Joi.object({
       "string.empty": `Part Name cannot be empty`,
       "string.min": `Minimum of {#limit} characters required`,
       "string.max": `Maximum of {#limit} characters allowed`,
-      "any.required": `Part Name id required`,
+      "any.required": `Part Name is required`,
     }),
   formPartCategory: Joi.string().required().messages({
     "string.empty": `Part Category cannot be empty`,

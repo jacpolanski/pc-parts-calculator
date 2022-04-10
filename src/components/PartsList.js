@@ -25,7 +25,7 @@ function PartsList() {
   return (
     <>
       <Form>
-        <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartCategory">
+        <Form.Group className="w-25" controlId="formPartCategory">
           <Form.Label>Show Category</Form.Label>
           <Form.Select
             name="formPartCategory"
@@ -94,13 +94,31 @@ function PartsList() {
         <tfoot>
           <tr>
             <td className="border-0">
-              {parts.length} {parts.length === 1 ? "item" : "items"}
+              {
+                parts.filter((part) =>
+                  categoryFilter !== "All"
+                    ? part.formPartCategory === categoryFilter
+                    : part
+                ).length
+              }{" "}
+              {parts.filter((part) =>
+                categoryFilter !== "All"
+                  ? part.formPartCategory === categoryFilter
+                  : part
+              ).length === 1
+                ? "item"
+                : "items"}
             </td>
             <td colSpan={2} className="text-end border-0">
               Total price:
             </td>
             <td className="border-0">
               {parts
+                .filter((part) =>
+                  categoryFilter !== "All"
+                    ? part.formPartCategory === categoryFilter
+                    : part
+                )
                 .reduce((agg, part) => parseFloat(part.formPartPrice) + agg, 0)
                 .toFixed(2)}
             </td>
