@@ -143,7 +143,7 @@ function PartsInput() {
               className="w-100 mb-3 mb-lg-0"
               controlId="formPartPrice"
             >
-              <Form.Label>Add Part Price</Form.Label>
+              <Form.Label>Price</Form.Label>
               <Form.Control
                 type="number"
                 step="0.1"
