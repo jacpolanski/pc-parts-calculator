@@ -46,13 +46,13 @@ export function PartsProvider({ children }) {
   useEffect(() => {
     write && localStorage.setItem("parts", JSON.stringify(parts));
     setWrite(false);
-  }, [write]);
+  }, [write, parts]);
 
   useEffect(() => {
     writeCategory &&
       localStorage.setItem("categories", JSON.stringify(hardwareCategories));
     setWriteCategory(false);
-  }, [writeCategory]);
+  }, [writeCategory, hardwareCategories]);
 
   const value = {
     parts,
