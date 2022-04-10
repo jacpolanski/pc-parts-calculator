@@ -67,7 +67,6 @@ function PartsInput() {
           (error) => error.context.key === "formPartPrice"
         ),
       });
-    console.log(errorsMsgs);
   }, [errors]);
 
   return (

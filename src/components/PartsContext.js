@@ -32,7 +32,6 @@ export function PartsProvider({ children }) {
 
   const deletePart = (id) => {
     let newParts = parts.filter((part) => part.id !== id);
-    console.log(newParts);
     setParts([...newParts]);
     setWrite(true);
   };
