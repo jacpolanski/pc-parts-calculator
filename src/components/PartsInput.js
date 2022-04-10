@@ -4,7 +4,7 @@ import uniqid from "uniqid";
 import { useParts } from "./PartsContext";
 
 function PartsInput() {
-  const { defPart, parts, setParts, setWrite } = useParts();
+  const { defPart, parts, setParts, setWrite, hardwareCategories } = useParts();
   const [formPart, setFormPart] = useState(defPart);
   const [error, setError] = useState(false);
 
@@ -72,9 +72,9 @@ function PartsInput() {
               value={formPart.formPartCategory}
               onChange={handleChange}
             >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+              {hardwareCategories.map((category) => (
+                <option key={uniqid()}>{category}</option>
+              ))}
             </Form.Select>
           </Form.Group>
 
@@ -82,6 +82,7 @@ function PartsInput() {
             <Form.Label>Add Part Price</Form.Label>
             <Form.Control
               type="number"
+              step="0.1"
               name="formPartPrice"
               value={formPart.formPartPrice}
               onChange={handleChange}
@@ -104,7 +105,12 @@ function PartsInput() {
         </Form.Group>
       </div>
 
-      <Button variant="primary" type="submit" className="w-25">
+      <Button
+        variant="primary"
+        type="submit"
+        variant="success"
+        className="w-25"
+      >
         Add part
       </Button>
     </Form>

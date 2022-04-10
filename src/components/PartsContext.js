@@ -7,6 +7,19 @@ export function useParts() {
 }
 
 export function PartsProvider({ children }) {
+  const hardwareCategories = [
+    // "Add custom category",
+    "Case",
+    "Power supply",
+    "Motherboard",
+    "Expansion cards",
+    "Storage devices",
+    "Fixed media",
+    "Removable media",
+    "Input peripherals",
+    "Output peripherals",
+  ];
+
   const defPart = {
     formPartName: "",
     formPartCategory: "",
@@ -39,6 +52,7 @@ export function PartsProvider({ children }) {
     setParts,
     defPart,
     setWrite,
+    hardwareCategories,
     deletePart,
   };
   return (
