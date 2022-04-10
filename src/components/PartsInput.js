@@ -110,14 +110,14 @@ function PartsInput() {
               controlId="formPartCategory"
             >
               <Form.Label>
-                Part Category
+                Category
                 <Button
                   size="sm"
                   variant="primary"
                   className="position-absolute end-0 top-0"
                   onClick={() => setShowAddCategory(true)}
                 >
-                  Add category
+                  Add new
                 </Button>
               </Form.Label>
               <Form.Select
