@@ -50,7 +50,7 @@ function PartsList() {
                   size="sm"
                   variant="info"
                   className="m-1"
-                  onClick={(e) => handleShow(part.id)}
+                  onClick={() => handleShow(part.id)}
                 >
                   Details
                 </Button>
