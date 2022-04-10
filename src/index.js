@@ -4,14 +4,17 @@ import App from "./App";
 
 import "./scss/main.scss";
 import { PartsProvider } from "./components/PartsContext";
+import { BrowserRouter } from "react-router-dom";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <PartsProvider>
-      <App />
-    </PartsProvider>
+    <BrowserRouter>
+      <PartsProvider>
+        <App />
+      </PartsProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
