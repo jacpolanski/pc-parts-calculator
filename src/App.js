@@ -18,7 +18,7 @@ function App() {
       </Accordion>
       <Card className="m-3 p-3">
         <Card.Body>
-          <Card.Title className="text-center">Parts List</Card.Title>
+          <Card.Title className="text-center fs-2 mb-5">Parts List</Card.Title>
           <PartsList />
         </Card.Body>
       </Card>

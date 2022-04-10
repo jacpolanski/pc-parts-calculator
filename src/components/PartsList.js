@@ -9,11 +9,27 @@ function PartsList() {
   const [show, setShow] = useState(false);
   const [partForModal, setPartForModal] = useState();
   const [categoryFilter, setCategoryFilter] = useState("All");
+  const [sortBy, setSortBy] = useState("Category");
 
   const handleShow = (id) => {
     const partForModal = parts.filter((part) => part.id === id);
     partForModal && setPartForModal(partForModal);
     setShow(true);
+  };
+  const sortByFunction = (a, b) => {
+    if (sortBy === "Category")
+      return a.formPartCategory > b.formPartCategory
+        ? 1
+        : b.formPartCategory > a.formPartCategory
+        ? -1
+        : 0;
+    if (sortBy === "Name")
+      return a.formPartName > b.formPartName
+        ? 1
+        : b.formPartName > a.formPartName
+        ? -1
+        : 0;
+    if (sortBy === "Price") return a.formPartPrice - b.formPartPrice;
   };
 
   if (parts === null || parts === undefined)
@@ -24,11 +40,12 @@ function PartsList() {
     );
   return (
     <>
-      <Form>
-        <Form.Group className="w-25" controlId="formPartCategory">
-          <Form.Label>Show Category</Form.Label>
+      <Form className="d-flex justify-content-end">
+        <Form.Group className="w-25 mx-3" controlId="formPartCategory">
+          <Form.Label className="fs-6">Show Category</Form.Label>
           <Form.Select
-            name="formPartCategory"
+            size="sm"
+            name="categoryFilter"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
           >
@@ -36,6 +53,19 @@ function PartsList() {
             {hardwareCategories.map((category) => (
               <option key={uniqid()}>{category}</option>
             ))}
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="w-25 mx-3" controlId="formPartCategory">
+          <Form.Label className="fs-6">Sort by</Form.Label>
+          <Form.Select
+            size="sm"
+            name="sortBy"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option>Name</option>
+            <option>Category</option>
+            <option>Price</option>
           </Form.Select>
         </Form.Group>
       </Form>
@@ -64,6 +94,7 @@ function PartsList() {
                 ? part.formPartCategory === categoryFilter
                 : part
             )
+            .sort((a, b) => sortByFunction(a, b))
             .map((part, i) => (
               <tr key={part.id}>
                 <td>{i + 1}</td>
