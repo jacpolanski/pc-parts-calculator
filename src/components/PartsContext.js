@@ -7,8 +7,7 @@ export function useParts() {
 }
 
 export function PartsProvider({ children }) {
-  const hardwareCategories = [
-    // "Add custom category",
+  const [hardwareCategories, setHardwareCategories] = useState([
     "Case",
     "Power supply",
     "Motherboard",
@@ -18,7 +17,7 @@ export function PartsProvider({ children }) {
     "Removable media",
     "Input peripherals",
     "Output peripherals",
-  ];
+  ]);
 
   const defPart = {
     formPartName: "",
@@ -29,6 +28,7 @@ export function PartsProvider({ children }) {
 
   const [parts, setParts] = useState([]);
   const [write, setWrite] = useState(false);
+  const [writeCategory, setWriteCategory] = useState(false);
 
   const deletePart = (id) => {
     let newParts = parts.filter((part) => part.id !== id);
@@ -39,12 +39,20 @@ export function PartsProvider({ children }) {
   useEffect(() => {
     const partsParsed = JSON.parse(localStorage.getItem("parts"));
     partsParsed && setParts(partsParsed);
+    const categoriesParsed = JSON.parse(localStorage.getItem("categories"));
+    categoriesParsed && setHardwareCategories(categoriesParsed);
   }, []);
 
   useEffect(() => {
     write && localStorage.setItem("parts", JSON.stringify(parts));
     setWrite(false);
-  }, [write, parts]);
+  }, [write]);
+
+  useEffect(() => {
+    writeCategory &&
+      localStorage.setItem("categories", JSON.stringify(hardwareCategories));
+    setWriteCategory(false);
+  }, [writeCategory]);
 
   const value = {
     parts,
@@ -52,6 +60,8 @@ export function PartsProvider({ children }) {
     defPart,
     setWrite,
     hardwareCategories,
+    setHardwareCategories,
+    setWriteCategory,
     deletePart,
   };
   return (
