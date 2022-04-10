@@ -41,7 +41,7 @@ function PartsList() {
   return (
     <>
       <Form className="d-flex justify-content-end">
-        <Form.Group className="w-25 mx-3" controlId="formPartCategory">
+        <Form.Group className="mx-3" controlId="formPartCategory">
           <Form.Label className="fs-6">Show Category</Form.Label>
           <Form.Select
             size="sm"
@@ -55,7 +55,7 @@ function PartsList() {
             ))}
           </Form.Select>
         </Form.Group>
-        <Form.Group className="w-25 mx-3" controlId="formPartCategory">
+        <Form.Group className="mx-3" controlId="formPartCategory">
           <Form.Label className="fs-6">Sort by</Form.Label>
           <Form.Select
             size="sm"

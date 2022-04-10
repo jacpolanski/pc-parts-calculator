@@ -179,7 +179,7 @@ function PartsInput() {
           </Form.Group>
         </div>
 
-        <Button type="submit" variant="success" className="w-25">
+        <Button type="submit" variant="success">
           Add part
         </Button>
       </Form>
