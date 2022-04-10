@@ -11,7 +11,7 @@ function About() {
         <Image src={profil} style={{ height: 300, width: 300 }} roundedCircle />
         <Card.Body>
           <Card.Title className="fs-3 text-center">Jacek Polański</Card.Title>
-          <Card.Text className="px-5 py-2">
+          <Card.Text className="px-1 py-2">
             I am JavaScript/React bootcamp graduate. As a Front-End developer I
             would like to create modern, visually attractive applications that
             contain logic connecting front and back in one perfect UX. In
