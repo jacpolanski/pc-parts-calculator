@@ -46,9 +46,9 @@ function CategoriesChart() {
   };
 
   return (
-    <div className="d-flex justify-content-between align-items-center">
+    <div className="d-flex justify-content-between align-items-center flex-column flex-lg-row">
       <Doughnut data={data} style={{ maxWidth: 500, maxHeight: 500 }} />
-      <div className="w-50">
+      <div className="w-100">
         <Table
           striped
           bordered
