@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useParts } from "./PartsContext";
-import { Button, Spinner, Table } from "react-bootstrap";
+import { Button, Form, Spinner, Table } from "react-bootstrap";
 import DetailsModal from "./DetailsModal";
+import uniqid from "uniqid";
 
 function PartsList() {
-  const { deletePart, parts } = useParts();
+  const { deletePart, parts, hardwareCategories } = useParts();
   const [show, setShow] = useState(false);
   const [partForModal, setPartForModal] = useState();
+  const [categoryFilter, setCategoryFilter] = useState("All");
 
   const handleShow = (id) => {
     const partForModal = parts.filter((part) => part.id === id);
@@ -22,6 +24,22 @@ function PartsList() {
     );
   return (
     <>
+      <Form>
+        <Form.Group className="w-100 mb-3 mb-lg-0" controlId="formPartCategory">
+          <Form.Label>Show Category</Form.Label>
+          <Form.Select
+            name="formPartCategory"
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+          >
+            <option key="All">All</option>
+            {hardwareCategories.map((category) => (
+              <option key={uniqid()}>{category}</option>
+            ))}
+          </Form.Select>
+        </Form.Group>
+      </Form>
+
       <Table
         striped
         bordered
@@ -40,32 +58,38 @@ function PartsList() {
           </tr>
         </thead>
         <tbody>
-          {parts.map((part, i) => (
-            <tr key={part.id}>
-              <td>{i + 1}</td>
-              <td>{part.formPartName}</td>
-              <td>{part.formPartCategory}</td>
-              <td>{part.formPartPrice}</td>
-              <td className="d-flex flex-wrap justify-content-center justify-content-lg-evenly align-items-center">
-                <Button
-                  size="sm"
-                  variant="info"
-                  className="m-1"
-                  onClick={() => handleShow(part.id)}
-                >
-                  Details
-                </Button>
-                <Button
-                  size="sm"
-                  variant="warning"
-                  className="m-1"
-                  onClick={() => deletePart(part.id)}
-                >
-                  Delete
-                </Button>
-              </td>
-            </tr>
-          ))}
+          {parts
+            .filter((part) =>
+              categoryFilter !== "All"
+                ? part.formPartCategory === categoryFilter
+                : part
+            )
+            .map((part, i) => (
+              <tr key={part.id}>
+                <td>{i + 1}</td>
+                <td>{part.formPartName}</td>
+                <td>{part.formPartCategory}</td>
+                <td>{part.formPartPrice}</td>
+                <td className="d-flex flex-wrap justify-content-center justify-content-lg-evenly align-items-center">
+                  <Button
+                    size="sm"
+                    variant="info"
+                    className="m-1"
+                    onClick={() => handleShow(part.id)}
+                  >
+                    Details
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="warning"
+                    className="m-1"
+                    onClick={() => deletePart(part.id)}
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
         </tbody>
         <tfoot>
           <tr>
