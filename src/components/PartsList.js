@@ -35,7 +35,7 @@ function PartsList() {
   if (parts === null || parts === undefined)
     return (
       <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
+        <span>Loading...</span>
       </Spinner>
     );
   return (
@@ -64,7 +64,7 @@ function PartsList() {
             onChange={(e) => setSortBy(e.target.value)}
           >
             <option>Name</option>
-            <option className={categoryFilter !== "All" && "d-none"}>
+            <option className={categoryFilter !== "All" ? "d-none" : ""}>
               Category
             </option>
             <option>Price</option>
