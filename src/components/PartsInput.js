@@ -200,8 +200,8 @@ function PartsInput() {
                   placeholder="Enter new part category"
                 />
               </Form.Group>
+              <Button type="submit">Add NEW Category</Button>
             </Form>
-            <Button type="submit">Add NEW Category</Button>
           </Modal.Body>
         </Modal>
       )}
