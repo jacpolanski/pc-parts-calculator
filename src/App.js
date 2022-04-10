@@ -2,6 +2,7 @@ import React from "react";
 import { Accordion, Card, Container } from "react-bootstrap";
 import PartsInput from "./components/PartsInput";
 import PartsList from "./components/PartsList";
+import CategoriesChart from "./components/CategoriesChart";
 
 function App() {
   return (
@@ -13,6 +14,14 @@ function App() {
           </Accordion.Header>
           <Accordion.Body>
             <PartsInput />
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header className="text-center">
+            Categories Price Chart
+          </Accordion.Header>
+          <Accordion.Body>
+            <CategoriesChart />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
