@@ -14,7 +14,7 @@ function NavBar() {
           className="mt-4 bg-light"
         />
         <Navbar.Collapse id="basic-navbar-nav" className="text-center">
-          <Nav className="my-5 me-auto w-100 fs-4 ">
+          <Nav className="my-5 me-auto w-100 fs-4 justify-content-end">
             <a href="/" className="nav-link p-3">
               Main
             </a>
